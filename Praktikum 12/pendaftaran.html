@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 50%;
+      margin: 50px auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    .error {
+      color: red;
+      margin-top: -8px;
+      margin-bottom: 16px;
+    }
+
+    #output {
+      margin-top: 20px;
+    }
+  </style>
+  <title>Form Validation</title>
+</head>
+<body>
+  <div class="container">
+    <form id="myForm">
+      <label for="nama">Nama Pelanggan:</label>
+      <input type="text" id="nama" name="nama" required maxlength="30">
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="jam">Jam Keberangkatan:</label>
+      <input type="text" id="jam" name="jam" placeholder="Format: 12.30" required pattern="^([01]?[0-9]|2[0-3])\.[0-5][0-9]$">
+
+      <label for="tujuan">Tujuan Keberangkatan:</label>
+      <input type="text" id="tujuan" name="tujuan" required>
+
+      <label for="jumlah">Jumlah Tiket:</label>
+      <input type="number" id="jumlah" name="jumlah" required min="1" max="10">
+
+      <div class="error" id="errorOutput"></div>
+
+      <button type="button" onclick="validateForm()">Submit</button>
+    </form>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    function validateForm() {
+      var nama = document.getElementById('nama').value;
+      var email = document.getElementById('email').value;
+      var jam = document.getElementById('jam').value;
+      var tujuan = document.getElementById('tujuan').value;
+      var jumlah = document.getElementById('jumlah').value;
+      var errorOutput = document.getElementById('errorOutput');
+      var output = document.getElementById('output');
+
+      // Clear previous errors
+      errorOutput.innerHTML = '';
+
+      // Validation
+      var isValid = true;
+
+      if (nama.length === 0 || nama.length > 30) {
+        errorOutput.innerHTML += 'Nama Pelanggan harus diisi (maksimum 30 karakter).<br>';
+        isValid = false;
+      }
+
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        errorOutput.innerHTML += 'Email harus diisi dengan format yang benar.<br>';
+        isValid = false;
+      }
+
+      var jamRegex = /^([01]?[0-9]|2[0-3])\.[0-5][0-9]$/;
+      if (!jamRegex.test(jam)) {
+        errorOutput.innerHTML += 'Jam Keberangkatan harus diisi dengan format jam antara 00.00 – 23.59.<br>';
+        isValid = false;
+      }
+
+      if (tujuan.length === 0) {
+        errorOutput.innerHTML += 'Tujuan Keberangkatan harus diisi.<br>';
+        isValid = false;
+      }
+
+      var jumlahInt = parseInt(jumlah);
+      if (isNaN(jumlahInt) || jumlahInt < 1 || jumlahInt > 10) {
+        errorOutput.innerHTML += 'Jumlah Tiket harus diisi dengan bilangan bulat antara 1 – 10.<br>';
+        isValid = false;
+      }
+
+      // Display output or errors
+      if (isValid) {
+        output.innerHTML =
+          'Nama Pelanggan: ' + nama + '<br>' +
+          'Email: ' + email + '<br>' +
+          'Jam Keberangkatan: ' + jam + '<br>' +
+          'Tujuan Keberangkatan: ' + tujuan + '<br>' +
+          'Jumlah Tiket: ' + jumlah + '<br>';
+      } else {
+        errorOutput.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>

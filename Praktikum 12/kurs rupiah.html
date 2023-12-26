@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Kurs Rupiah - mata uang asing</title>
+</head>
+<body>
+  <div class="container">
+    <h1>Kurs Rupiah - mata uang asing</h1>
+    <label for="currency">Valas:</label>
+    <select id="currency" onchange="convertCurrency()">
+      <option value="usd">Dollar US</option>
+      <option value="sgd">Dollar Singapore</option>
+      <option value="myr">Ringgit Malaysia</option>
+      <option value="jpy">Yen Jepang</option>
+      <option value="eur">Euro</option>
+      <option value="sar">Riyal Arab Saudi</option>
+    </select>
+    <label for="amount">Masukkan nilai:</label>
+    <input type="number" id="amount" placeholder="Masukkan jumlah" oninput="convertCurrency()">
+    <label for="result">Nilai rupiah:</label>
+    <input type="text" id="result" readonly>
+  </div>
+  <script src="rupiah.js"></script>
+</body>
+</html>

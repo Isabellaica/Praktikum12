@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Picker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        #imageContainer {
+            margin-top: 20px;
+        }
+
+        #selectedImage {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ccc;
+        }
+
+        .alert {
+            padding: 10px;
+            background-color: #f2f2f2;
+            color: #333;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <label for="imageSelector">Pilih Gambar:</label>
+    <select id="imageSelector" onchange="displayImage()">
+        <option value="panda">Panda</option>
+        <option value="plains-bison">Plains Bison</option>
+        <option value="elephant">Elephant</option>
+        <option value="tiger">Tiger</option>
+        <option value="wolf">Wolf</option>
+        <!-- Tambahkan opsi lain jika diperlukan -->
+    </select>
+
+    <div id="imageContainer">
+        <img id="selectedImage" src="" alt="Selected Image">
+    </div>
+
+    <div id="alertBox" class="alert"></div>
+
+    <script>
+        function displayImage() {
+            var imageSelector = document.getElementById("imageSelector");
+            var selectedImage = document.getElementById("selectedImage");
+            var alertBox = document.getElementById("alertBox");
+
+            var imageName = imageSelector.value;
+            var imageUrl = getImageUrl(imageName);
+
+            selectedImage.src = imageUrl;
+
+            // Menampilkan nama file gambar dalam kotak alert
+            var alertMessage = "Nama file gambar: " + imageName + ".jpg";
+            alertBox.innerText = alertMessage;
+        }
+
+        function getImageUrl(imageName) {
+            // Ganti dengan URL gambar dari internet sesuai dengan nama file
+            switch (imageName) {
+                case "panda":
+                    return "https://tse3.mm.bing.net/th?id=OIP.LnPZLxsVjpCyplcCbwU61wHaEo&pid=Api&P=0&h=180.jpg";
+                case "plains-bison":
+                    return "https://tse1.mm.bing.net/th?id=OIP.8lsy7YE-ZL1GTg4ZFtc1TgHaEj&pid=Api&P=0&h=180.jpg"; 
+                case "elephant":
+                    return "https://tse1.mm.bing.net/th?id=OIP.OpUhtNLG8esHDwUBk-zDAAHaFj&pid=Api&P=0&h=180.jpg"; 
+                case "tiger":
+                    return "https://tse4.mm.bing.net/th?id=OIP.Kf13hpLV-VD3_ps0f3DtSwHaEK&pid=Api&P=0&h=180.jpg"; 
+                case "wolf":
+                    return "https://tse2.mm.bing.net/th?id=OIP.pamQvVIj5PBOm8MW4lFBxQHaGi&pid=Api&P=0&h=180"; 
+                // Tambahkan case lain jika diperlukan
+                default:
+                    return ""; // Ganti dengan default URL jika diperlukan
+            }
+        }
+    </script>
+</body>
+</html>
